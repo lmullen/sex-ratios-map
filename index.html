@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<title>Differences in U.S. Sex Ratios by County, 1820&ndash;1900</title>
+<meta name="author" content="Lincoln Mullen">
+<meta name="description" content="An interactive map departures from an even 
+sex ratio in the United States.">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/normalize.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.min.css">
+<link rel="stylesheet" href="http://d3js.org/colorbrewer.v1.css"></script>
+<link rel="stylesheet" href="style.css">
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-25121492-1', 'lincolnmullen.com');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+</head>
+<body>
+<div class="row">
+  <h1>Differences in U.S. Sex Ratios by County, 1820&ndash;1900</h1>
+</div>
+<div class="row">
+  <div id="viz"></div>
+</div>
+<div class="row">
+  <div class="small-8 columns">
+    <div id="slider"></div>
+  </div>
+  <div class="small-4 columns">
+    <select name="field-selector" id="field-selector">
+    </select>
+  </div>
+</div>
+<div class="row">
+  <hr>
+</div>
+<div class="row">
+  <div id="description">
+    <h5>How to use this map</h5>
+    <p>This map [UNDER DEVELOPMENT] shows differences in sex ratios by 
+    county. Counties shown in white had a very nearly equal ratio of females 
+    to males. </p>
+    <hr>
+    <p>
+    Map by <a href="http://lincolnmullen.com">Lincoln Mullen</a>. Code 
+    available on <a href="https://github.com/lmullen/slavery-map">
+      GitHub</a>, licensed MIT. Suggestions and criticism welcome: <a 
+      href="mailto:lincoln@lincolnmullen.com">lincoln@lincolnmullen.com</a>.
+    </p>
+    <h5>Citation</h5>
+    <p>
+    If you use this map in your research, I would appreciate a citation.
+    Here is the suggested form:
+    <blockquote>
+      Lincoln Mullen, "Differences in U.S. Sex Ratios by County, 
+      1820&ndash;1900," interactive
+      map, http://lincolnmullen.com/projects/sex-ratios/.
+    </blockquote>
+
+    You should also cite the NHGIS:
+
+    <blockquote>
+      Minnesota Population Center, <em>National Historical Geographic 
+        Information System: Version 2.0</em> (Minneapolis, MN: University of 
+      Minnesota, 2011), http://www.nhgis.org.
+    </blockquote>
+    </p>
+    <hr>
+    <h5>Explanation of Census data</h5>
+    <p>
+    The U.S. Census data and shapefiles for these maps comes from Minnesota 
+    Population Center, <a href="https://www.nhgis.org/"><em>National 
+    Historical Geographic Information System</em></a>, version 2.0 
+(Minneapolis, MN: University of Minnesota, 
+    2011).   </div>
+</div>
+<script src="visualization.js"></script>
+<p id="back-link">
+<a href="http://lincolnmullen.com">&larr; Back to home page</a>
+</p>
+</body>
+</html>
