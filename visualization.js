@@ -1,6 +1,6 @@
 queue()
   .defer(d3.json, "coast.json")
-  .defer(d3.json, "us.json")
+  .defer(d3.json, "us2.json")
   .defer(d3.csv,  "gender-census.csv")
   .await(ready);
 
@@ -55,13 +55,13 @@ var sliderContainer = d3.select("#slider").append("svg")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var x = d3.scale.linear()
-      .domain([1815, 1904])
+      .domain([1815, 1924])
       .range([0, sliderWidth])
       .clamp(true);
 
 var brushToYear = d3.scale.threshold()
-      .domain([1820,1830,1840,1850,1860,1870,1880,1890,1900])
-      .range([1820,1830,1840,1850,1860,1870,1880,1890,1900]);
+      .domain([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920])
+      .range([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920]);
 
 var brush = d3.svg.brush()
   .x(x)
@@ -74,7 +74,7 @@ sliderContainer.append("g")
   .call(d3.svg.axis()
           .scale(x)
           .orient("bottom")
-          .ticks(8)
+          .ticks(12)
           .tickFormat(function(d) { return d; })
           .tickSize(0)
           .tickPadding(12))
@@ -107,6 +107,8 @@ for (var key in maps) {
   .text(maps[key].label);
 }
 
+var labels = ["75-100% female", "60-75% female", "55-60% female", "51-55% female","even","51-55% male", "55-60% male", "60-75% male", "75-100% male"];
+//
 // Legend
 var legend = svg.append("g")
   .attr("transform", "translate(" + (width - 190) + "," + 200 + ")")
@@ -265,9 +267,7 @@ function updateLegend(map) {
       .append("text")
       .attr("x", 12)
       .attr("y", i * 20 + 5)
-      .text(d3.round(bounds[0], 2).toLocaleString() + 
-            "–" +
-            d3.round(bounds[1], 2).toLocaleString() );
+      .text(labels[i]);
   }
 
   legendColors.append("circle")

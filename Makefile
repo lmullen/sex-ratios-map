@@ -59,7 +59,7 @@ clobber:
 deploy:
 	rsync --progress --delete -avz \
 		*.json *.html *.css *.js *.csv \
-		reclaim:~/public_html/lincolnmullen.com/projects/gender-map/
+		reclaim:~/public_html/lincolnmullen.com/projects/sex-ratios/
 
 .PHONY : default clean clobber deploy
 
