@@ -17,7 +17,7 @@ h1 {
 .states {
   fill: none;
   stroke: black;
-  stroke-width: 1.0;
+  stroke-width: 0.5;
   pointer-events: none;
 }
 

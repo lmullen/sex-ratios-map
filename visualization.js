@@ -54,13 +54,13 @@ var sliderContainer = d3.select("#slider").append("svg")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var x = d3.scale.linear()
-      .domain([1815, 2014])
+      .domain([1815, 2004])
       .range([0, sliderWidth])
       .clamp(true);
 
 var brushToYear = d3.scale.threshold()
-      .domain(d3.range(1820,2020,10))
-      .range(d3.range(1820,2020,10));
+      .domain(d3.range(1820,2010,10))
+      .range(d3.range(1820,2010,10));
 
 var brush = d3.svg.brush()
   .x(x)

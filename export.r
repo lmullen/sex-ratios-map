@@ -12,6 +12,7 @@ export <- data_county %>%
   mutate(gisjoin = GISJOIN) %>%
   mutate(diff = male / (male + female) - 0.5) %>%
   mutate(diff = round(diff, 3)) %>%
-  select(gisjoin, year, diff, male, female)
+  select(gisjoin, year, diff, male, female) %>%
+  filter(year <= 2010)
 
 write.csv(export, "gender-census.csv")
