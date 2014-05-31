@@ -11,13 +11,13 @@ h1 {
 .counties {
   fill: white;
   stroke: #bbb;
-  stroke-width: 0.25;
+  stroke-width: 0.20;
 }
 
 .states {
   fill: none;
   stroke: black;
-  stroke-width: 0.5;
+  stroke-width: 0.4;
   pointer-events: none;
 }
 
