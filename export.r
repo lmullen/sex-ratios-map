@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript --vanilla
+
 options(stringsAsFactors = FALSE)
 library(dplyr)
 
@@ -10,7 +12,6 @@ export <- data_county %>%
   mutate(gisjoin = GISJOIN) %>%
   mutate(diff = male / (male + female) - 0.5) %>%
   mutate(diff = round(diff, 3)) %>%
-  select(gisjoin, year, diff, male, female) %>%
-  filter(1790 <= year & year <= 1900)
+  select(gisjoin, year, diff, male, female)
 
 write.csv(export, "gender-census.csv")

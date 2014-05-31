@@ -1,6 +1,5 @@
 queue()
-  .defer(d3.json, "coast.json")
-  .defer(d3.json, "us2.json")
+  .defer(d3.json, "us.json")
   .defer(d3.csv,  "gender-census.csv")
   .await(ready);
 
@@ -18,7 +17,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 var maps = {
   "sexRatio": {
     "field": "diff",
-    "label": "Difference in Sex Ratio",
+    "label": "Divergence in Sex Ratio",
     "color": "BrBG",
     "scale": d3.scale.threshold()
             .domain([-0.5,-0.25,-0.1,-0.05,-0.01,0.01,0.05,0.1,0.25, 0.5])
@@ -55,13 +54,13 @@ var sliderContainer = d3.select("#slider").append("svg")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var x = d3.scale.linear()
-      .domain([1815, 1924])
+      .domain([1815, 2014])
       .range([0, sliderWidth])
       .clamp(true);
 
 var brushToYear = d3.scale.threshold()
-      .domain([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920])
-      .range([1820,1830,1840,1850,1860,1870,1880,1890,1900,1910,1920]);
+      .domain(d3.range(1820,2020,10))
+      .range(d3.range(1820,2020,10));
 
 var brush = d3.svg.brush()
   .x(x)
@@ -74,7 +73,7 @@ sliderContainer.append("g")
   .call(d3.svg.axis()
           .scale(x)
           .orient("bottom")
-          .ticks(12)
+          .ticks(20)
           .tickFormat(function(d) { return d; })
           .tickSize(0)
           .tickPadding(12))
@@ -135,7 +134,7 @@ var tooltip = d3.select("body").append("div")
   .classed("tooltip", true)
   .classed("hidden", true);
 
-function ready(error, coast, us, census) { 
+function ready(error, us, census) { 
 
   if (error) {
     loading.text("Sorry, there has been an error. " +
@@ -143,7 +142,6 @@ function ready(error, coast, us, census) {
     console.log(error);
   }
 
-  data.coast  = coast;
   data.us     = us;
   data.census = d3.nest()
     .key( function(d) {return d.gisjoin;})
@@ -152,7 +150,6 @@ function ready(error, coast, us, census) {
 
   // Draw the map for the first time
   slider.call(brush.event).call(brush.extent([1820, 1820])).call(brush.event);
-  drawCoast();
   drawMap(current.year, current.map);
   loading.remove();
 
@@ -228,17 +225,6 @@ function drawMap(date, map) {
 
   current.map = map;
   updateLegend(map);
-}
-
-function drawCoast() {
-  var coastline = topojson.feature(data.coast, data.coast.objects.coast);
-  svg
-  .selectAll(".coast")
-  .data(coastline.features)
-  .enter()
-  .append("path")
-  .attr("class", "coast")
-  .attr("d", path);
 }
 
 function fieldSelected() {
