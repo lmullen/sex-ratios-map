@@ -28,11 +28,13 @@ simplify: clean-shp
 	mapshaper --auto-snap -i 5000 $(shapefiles)/county_1980.shp -o build/county_1980.shp
 	mapshaper --auto-snap -i 5000 $(shapefiles)/county_1990.shp -o build/county_1990.shp
 	mapshaper --auto-snap -i 5000 $(shapefiles)/county_2000.shp -o build/county_2000.shp
+	# 2010 needs to be munged into the format of the others
+	mapshaper --encoding utf-8 --join fips.csv --join-keys STATEFP10,FIPS:str --expressionm"NHGISNAM=NAME10" --auto-snap -i 5000 ~/research-data/nhgis-shapefiles/epsg4326/county_2010.shp -o build/county_2010.shm
 
 us.json: 
 		node --max_old_space_size=7192 /usr/local/bin/topojson \
 		-o $@ \
-		-q 1e5 --simplify-proportion 0.01 \
+		-q 1e5 --simplify-proportion 0.05 \
 		--projection 'd3.geo.albersUsa().scale(1000).translate([423, 240])' \
 		--id-property=GISJOIN \
 		-p c=NHGISNAM \
@@ -60,7 +62,8 @@ us.json:
 		build/county_1970.shp \
 		build/county_1980.shp \
 		build/county_1990.shp \
-		build/county_2000.shp
+		build/county_2000.shp \
+		build/county_2010.shp
 
 clean-shp:
 	rm -f build/county_*
