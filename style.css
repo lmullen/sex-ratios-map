@@ -161,6 +161,7 @@ body #back-link {
 
 #field-selector {
   margin-top: 10px;
+  display: none;
 }
 
 .overlay {
